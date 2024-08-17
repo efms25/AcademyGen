@@ -65,7 +65,6 @@ describe('UserService', () => {
       _id: '123345abc',
       username: 'JohnDoe',
       email: 'john.doe@example.com',
-      password: 'password123',
     });
   });
   it('should return user with the access data', async () => {
@@ -74,11 +73,10 @@ describe('UserService', () => {
       _id: '123345abc',
       username: 'JohnDoe',
       email: 'john.doe@example.com',
-      password: 'password123',
     });
   });
   it('user not found', async () => {
     const user = await service.getUserByAccess('badPass', 'john.doe@example.com');
-    expect(user).toBe('user not found')
+    expect(user).toBe(null)
   })
 });

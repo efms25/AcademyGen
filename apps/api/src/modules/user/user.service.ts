@@ -29,20 +29,26 @@ export class UserService {
     public async getUserById(id: string): Promise<UserDTO|string> {
         try{
             if(!id) return "Id is required";
-            return this.database.find(f => f.id = id)
+            const user = this.database.find(f => f.id = id)
+            const {password, ...result} = user;
+            return result
         } catch(err) {
             throw new Error(err)
         }
     }
 
-    public async getUserByAccess(password: string, email?: string, username?:string): Promise<UserDTO|string> {
+    public async getUserByAccess(pass: string, email?: string, username?:string): Promise<UserDTO|string> {
         try{
-            if(!password || (!email && !username)) {
+            if(!pass || (!email && !username)) {
                 return "missing parameters";
             }
-            const user = this.database.find(f => f.password === password && (f.email === email || f.username === username ));
+            const user = this.database.find(f => f.password === pass && (f.email === email || f.username === username ));
 
-            return user || 'user not found';
+            if(!user) return null;
+
+            const {password, ...result} = user;
+
+            return result || null;
         } catch(err) {
             throw new Error(err)
         }

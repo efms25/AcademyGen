@@ -7,10 +7,9 @@ export class AuthService {
 
   async validateUser(
     pass: string,
-    email?: string,
-    username?: string,
+    username: string,
   ): Promise<any> {
-    const user = await this.userService.getUserByAccess(pass, email, username);
+    const user = await this.userService.getUserByAccess(pass, username);
     if (!user) {
       return null;
     }

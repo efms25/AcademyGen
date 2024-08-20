@@ -37,12 +37,12 @@ export class UserService {
         }
     }
 
-    public async getUserByAccess(pass: string, email?: string, username?:string): Promise<UserDTO|string> {
+    public async getUserByAccess(pass: string, username:string): Promise<UserDTO|string> {
         try{
-            if(!pass || (!email && !username)) {
+            if(!pass || !username) {
                 return "missing parameters";
             }
-            const user = this.database.find(f => f.password === pass && (f.email === email || f.username === username ));
+            const user = this.database.find(f => f.password === pass && (f.email === username || f.username === username ));
 
             if(!user) return null;
 

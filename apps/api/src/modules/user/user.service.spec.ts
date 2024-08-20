@@ -55,7 +55,7 @@ describe('UserService', () => {
   });
 
   it('should return message of missing', async () => {
-    const user = await service.getUserByAccess('123abc123');
+    const user = await service.getUserByAccess('123abc123',null);
     expect(user).toBe('missing parameters');
   });
 
